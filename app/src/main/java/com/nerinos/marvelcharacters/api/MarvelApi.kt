@@ -2,6 +2,9 @@ package com.nerinos.marvelcharacters.api
 
 import com.nerinos.marvelcharacters.BuildConfig
 import com.nerinos.marvelcharacters.utils.Utils.Companion.md5
+import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -18,13 +21,13 @@ interface MarvelApi {
     }
 
     @GET("v1/public/characters")
-    suspend fun getCharacters(
+    fun getCharacters(
         @Query("apikey") apikey: String = API_KEY,
         @Query("nameStartsWith") nameStartsWith: String?,
         @Query("limit") limit: Int,
         @Query("offset") offset: Int?,
         @Query("hash") hash: String,
         @Query("ts") ts: String
-    ): MarvelResponse
+    ): Single<MarvelResponse>
 
 }

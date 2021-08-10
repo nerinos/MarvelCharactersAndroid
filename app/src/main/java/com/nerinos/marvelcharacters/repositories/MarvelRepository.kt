@@ -3,6 +3,7 @@ package com.nerinos.marvelcharacters.repositories
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
+import androidx.paging.rxjava3.flowable
 import com.nerinos.marvelcharacters.api.MarvelApi
 import com.nerinos.marvelcharacters.data.db.CharactersDatabase
 import com.nerinos.marvelcharacters.utils.MarvelRemoteMediator

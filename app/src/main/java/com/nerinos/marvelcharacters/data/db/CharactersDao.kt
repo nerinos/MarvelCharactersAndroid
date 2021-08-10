@@ -12,9 +12,9 @@ interface CharactersDao {
     fun pagingSource(query: String): PagingSource<Int, MarvelCharacter>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(character: List<MarvelCharacter>)
+    fun insertAll(character: List<MarvelCharacter>)
 
     @Query("DELETE FROM table_characters WHERE id = :query")
-    suspend fun deleteByQuery(query: String)
+    fun deleteByQuery(query: String)
 
 }

@@ -6,7 +6,7 @@ data class MarvelResponse (
     val data: MarvelResponseData
 
 ) {
-    class MarvelResponseData(
+    data class MarvelResponseData(
         val offset: Int,
         val total: Int,
         val results: List<MarvelCharacter>

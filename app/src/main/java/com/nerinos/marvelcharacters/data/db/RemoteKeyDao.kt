@@ -5,15 +5,17 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.nerinos.marvelcharacters.data.entities.RemoteKey
+import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.core.Single
 
 @Dao
 interface RemoteKeyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrReplace(remoteKey: RemoteKey)
+    fun insertOrReplace(remoteKey: RemoteKey)
 
     @Query("SELECT * FROM remote_keys WHERE label = :query")
-    suspend fun remoteKeyByQuery(query: String): RemoteKey
+    fun remoteKeyByQuery(query: String): Single<RemoteKey>
 
     @Query("DELETE FROM remote_keys WHERE label = :query")
-    suspend fun deleteByQuery(query: String)
+    fun deleteByQuery(query: String)
 }

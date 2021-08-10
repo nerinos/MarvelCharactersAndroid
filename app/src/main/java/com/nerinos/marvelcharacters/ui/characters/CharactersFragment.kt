@@ -1,8 +1,10 @@
 package com.nerinos.marvelcharacters.ui.characters
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
@@ -48,7 +50,7 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
         }
 
         viewModel.characters.observe(viewLifecycleOwner) {
-            adapter.submitData(viewLifecycleOwner.lifecycle, it) // important to pass lifecycle of a VIEW, not a fragment
+            adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
         adapter.addLoadStateListener { loadstate ->
@@ -94,6 +96,7 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                Log.e("SAMPLE_TAG", "query: " + query)
                 if (query != null) {
                     binding.recyclerView.scrollToPosition(0) // not smooth jump
                     viewModel.searchCharacters(query)
@@ -106,6 +109,19 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
                 return true
             }
 
+        })
+        searchItem.setOnActionExpandListener(object: MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                if (searchView.query.isEmpty()) {
+                    binding.recyclerView.scrollToPosition(0) // not smooth jump
+                    viewModel.searchCharacters("")
+                }
+                return true
+            }
         })
     }
 }

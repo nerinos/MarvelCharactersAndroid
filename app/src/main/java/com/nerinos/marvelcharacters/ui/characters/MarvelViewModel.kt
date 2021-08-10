@@ -18,6 +18,7 @@ class MarvelViewModel @ViewModelInject constructor(
             queryString ->
         repository.getSearchResults(queryString).cachedIn(viewModelScope)
 
+
     }
 
 
